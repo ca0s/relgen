@@ -1,0 +1,338 @@
+[
+	{
+		"name": "empleado",
+		"fields": [
+			{
+				"name": "cedula_id",
+				"type": "int",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "nombre",
+				"type": "text",
+				"gentype": "randstr"
+			},
+			{
+				"name": "direccion",
+				"type": "text",
+				"gentype": "randstr",
+				"genlen": 15
+			},
+			{
+				"name": "telefono",
+				"type": "int",
+				"gentype": "randstr",
+				"genlen": 9,
+				"charset": "0123456789"
+			},
+			{
+				"name": "login",
+				"type": "text",
+				"references": ["usuario.login"]
+			}
+		],
+		"n": 1000000
+	},
+	{
+		"name": "usuario",
+		"fields": [
+			{
+				"name": "login",
+				"type": "text",
+				"prefix": "Usuario-",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "password",
+				"type": "text",
+				"prefix": "pass-",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "email",
+				"type": "text",
+				"prefix": "usuario",
+				"suffix": "@uah.es",
+				"gentype": "inc_int"
+			}
+		],
+		"n": 1000000
+	},
+	{
+		"name": "ordenador",
+		"fields": [
+			{
+				"name": "id",
+				"type": "numeric",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "nombre",
+				"type": "text",
+				"gentype": "inc_int",
+				"preffix": "Ordenador-"
+			},
+			{
+				"name": "ram",
+				"type": "text",
+				"gentype": "randint",
+				"genbegin": 1,
+				"genend": 32,
+				"suffix": "GB"
+			},
+			{
+				"name": "procesador",
+				"type": "text",
+				"gentype": "randstr",
+				"charset": "0123456789ABCDEF",
+				"genlen": 5
+			},
+			{
+				"name": "tipo",
+				"type": "text"
+			}
+		],
+		"n": 60000
+	},
+	{
+		"name": "tiene",
+		"fields": [
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["ordenador.id"]
+			},
+			{
+				"name": "marca",
+				"type": "text",
+				"references": ["disco.marca"]
+			},	
+			{
+				"name": "modelo",
+				"type": "text",
+				"references": ["disco.modelo"]
+			}
+		],
+		"n": 2000
+	},
+	{
+		"name": "disco",
+		"fields": [
+			{
+				"name": "marca",
+				"type": "text",
+				"gentype": "randchoose",
+				"values": ["Samsung"]
+			},
+			{
+				"name": "modelo",
+				"type": "int",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "tamanio",
+				"type": "text",
+				"gentype": "randint",
+				"genbegin": 60,
+				"genend": 1000,
+				"suffix": "GB"
+			},
+			{
+				"name": "tipo",
+				"type": "text",
+				"gentype": "randchoose",
+				"values": ["IDE", "SATA", "SATA-2", "SSD"]
+			}
+		],
+		"n": 1000
+	},
+	{
+		"name": "servidor",
+		"fields": [
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["ordenador.id"],
+				"unique": true,
+				"filter": "evens"
+			}
+		],
+		"n": 30000
+	},
+	{
+		"name": "terminal",
+		"fields": [
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["ordenador.id"],
+				"unique": true,
+				"filter": "odds"
+			}
+		],
+		"n": 30000
+	},
+	{
+		"name": "sesion",
+		"fields": [
+			{
+				"name": "fecha",
+				"type": "date",
+				"gentype": "randdate",
+				"genbegin": "1/1/2012",
+				"genend": "31/12/2012"
+			},
+			{
+				"name": "hora",
+				"type": "time",
+				"gentype": "randtime",
+				"genbegin": "00:00",
+				"genend": "23:59"
+			},
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["terminal.id"]
+			},
+			{
+				"name": "login",
+				"type": "text",
+				"references": ["usuario.login"]
+			}
+		],
+		"n": 3000000
+	},
+	{
+		"name": "utiliza",
+		"fields": [
+			{
+				"name": "nombre_aplic",
+				"type": "text",
+				"references": ["aplicacion.nombre_aplic"]
+			},
+			{
+				"name": "version",
+				"type": "text",
+				"references": ["aplicacion.version"]
+			},
+			{
+				"name": "fecha",
+				"type": "date",
+				"references": ["sesion.fecha"]
+			},
+			{
+				"name": "hora",
+				"type": "time",
+				"references": ["sesion.hora"]
+			},
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["sesion.id"]
+			}
+		],
+		"n": 9000000
+	},
+	{
+		"name": "aplicacion",
+		"fields": [
+			{
+				"name": "nombre_aplic",
+				"type": "text",
+				"gentype": "randstr",
+				"prefix": "App-"
+			},
+			{
+				"name": "version",
+				"type": "text",
+				"gentype": "randint",
+				"genbegin": 1,
+				"genend": 20
+			},
+			{
+				"name": "fecha_expiracion",
+				"type": "date",
+				"gentype": "randdate",
+				"genbegin": "1/1/2012",
+				"genend": "31/12/2012"
+			}
+		],
+		"n": 500000
+	},
+	{
+		"name": "depende",
+		"fields": [
+			{
+				"name": "nombre_aplic",
+				"type": "text",
+				"references": ["aplicacion.nombre_aplic"]
+			},
+			{
+				"name": "version",
+				"type": "text",
+				"references": ["aplicacion.version"]
+			},
+			{
+				"name": "nombre_dep",
+				"type": "text",
+				"references": ["aplicacion.nombre_aplic"]
+			},
+			{
+				"name": "version_dep",
+				"type": "text",
+				"references": ["aplicacion.version"]
+			}
+		],
+		"n": 1000000
+	},
+	{
+		"name": "requiere",
+		"fields": [
+			{
+				"name": "nombre_aplic",
+				"type": "text",
+				"references": ["aplicacion.nombre_aplic"]
+			},
+			{
+				"name": "version",
+				"type": "text",
+				"references": ["aplicacion.version"]
+			},
+			{
+				"name": "nombre_servicio",
+				"type": "text",
+				"references": ["servicio.nombre"]
+			},
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["servicio.id"]
+			}
+		],
+		"n": 400000
+	},
+	{
+		"name": "servicio",
+		"fields": [
+			{
+				"name": "nombre",
+				"type": "text",
+				"gentype": "randstr",
+				"prefix": "Serv-"
+			},
+			{
+				"name": "fecha_inicio",
+				"type": "date",
+				"gentype": "randdate",
+				"genbegin": "1/1/2012",
+				"genend": "31/12/2012"
+			},
+			{
+				"name": "id",
+				"type": "int",
+				"references": ["servidor.id"]
+			}
+		],
+		"n": 200000
+	}
+]

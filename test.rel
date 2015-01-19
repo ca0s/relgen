@@ -1,0 +1,62 @@
+[
+	{
+		"name": "tabla1",
+		"fields": [
+			{
+				"name": "campo1",
+				"type": "int",
+				"gentype": "inc_int"
+			},
+			{
+				"name": "campo2",
+				"type": "text",
+				"gentype": "randstr",
+				"genlen": 15
+			},
+			{
+				"name": "campo3",
+				"type": "int",
+				"gentype": "randint"
+			}
+		],
+		"n": 100000
+	},
+	{
+		"name": "tabla2",
+		"fields": [
+			{
+				"name": "campo1",
+				"references": ["tabla1.campo1"]
+			},
+			{
+				"name": "campo2",
+				"type": "text",
+				"gentype": "randstr"
+			},
+			{
+				"name": "campo3",
+				"type": "text",
+				"gentype": "randstr"
+			}
+		],
+		"n": 50000
+	},
+	{
+		"name": "tabla3",
+		"fields": [
+			{
+				"name": "campo1",
+				"references": ["tabla2.campo1"]
+			},
+			{
+				"name": "campo2",
+				"references": ["tabla2.campo2"]
+			},
+			{
+				"name": "campo3",
+				"references": ["tabla2.campo3"]
+			}
+		],
+		"n": 30000
+	}
+]
