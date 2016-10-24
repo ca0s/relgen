@@ -7,7 +7,7 @@ It parses a data schema containing table structure, relations and constraints an
 
 ## Usage:
 ```
-$ python2 reldata.py [-h] -f data_definition.rel [-sgbd {mysql|postgresql} -sdb sql_database [-shost sql_host [-sport sql_port]] [-suser sql_user [-spass sql_pass]] [-sdel]]
+$ python2 relgen.py [-h] -f data_definition.rel [-sgbd {mysql|postgresql} -sdb sql_database [-shost sql_host [-sport sql_port]] [-suser sql_user [-spass sql_pass]] [-sdel]]
   -h      Show this help
   -f      File to load data definition from
   -sgbd   Insert data in a database of given type. MySQL and PostgreSQL are supported (optional)
