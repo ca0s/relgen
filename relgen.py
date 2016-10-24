@@ -77,7 +77,7 @@ if __name__ == '__main__':
 	con = None
 	args = parse_args(argv)
 	if 'help' in args or 'datafile' not in args:
-		print >> stderr, 'python2 reldata.py [-h] -f data_definition.rel [-sgbd {mysql|postgresql} -sdb sql_database [-shost sql_host [-sport sql_port]] [-suser sql_user [-spass sql_pass]] [-sdel]]'
+		print >> stderr, 'python2 relgen.py [-h] -f data_definition.rel [-sgbd {mysql|postgresql} -sdb sql_database [-shost sql_host [-sport sql_port]] [-suser sql_user [-spass sql_pass]] [-sdel]]'
 		print >> stderr, '\t-h\t\t\t\tShow this help'
 		print >> stderr, '\t-f\t\t\t\tFile to load data definition from'
 		print >> stderr, '\t-sgbd (optional)\t\tInsert data in a database of given type. MySQL and PostgreSQL are supported'
